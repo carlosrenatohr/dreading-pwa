@@ -1,6 +1,6 @@
 import { API_BASE } from './config.js';
 import { createApi } from './src/api.js';
-import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor } from './src/format.js';
+import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor, prayer } from './src/format.js';
 
 const api = createApi(API_BASE);
 const $ = (id) => document.getElementById(id);
@@ -28,7 +28,6 @@ async function loadDate(iso) {
     state.reading = reading;
     state.section = 0;
     render();
-    if (iso === todayIso()) bumpStreak(iso);
   } catch (err) {
     setStatus(`No se pudo cargar la lectura. Revisa la conexión con la API (${API_BASE}).`);
   }
@@ -44,6 +43,7 @@ function render() {
   renderTabs();
   renderSection();
   renderReflection();
+  showStreak();
   setStatus('');
 }
 
@@ -88,12 +88,37 @@ function renderReflection() {
   });
 }
 
+function readStreak() {
+  try { return JSON.parse(localStorage.getItem('dreading_streak')); } catch (_) { return null; }
+}
+
+// Display the current streak (no increment).
+function showStreak() {
+  const s = readStreak();
+  if (s && s.count) { $('streak').textContent = `🔥 ${s.count} días seguidos`; $('streak').hidden = false; }
+  else { $('streak').hidden = true; }
+}
+
+// Reward the day's streak — only when the reader closes the prayer with "Amén".
 function bumpStreak(iso) {
-  let prev = null;
-  try { prev = JSON.parse(localStorage.getItem('dreading_streak')); } catch (_) {}
+  const prev = readStreak();
+  const already = !!(prev && prev.date === iso);
   const s = nextStreak(prev, iso);
   localStorage.setItem('dreading_streak', JSON.stringify(s));
-  $('streak').textContent = s.count > 1 ? `🔥 ${s.count} días seguidos leyendo` : '¡Empiezas tu racha hoy!';
+  return { count: s.count, already };
+}
+
+/* --- Prayer modal + streak reward --- */
+function openPrayer() {
+  $('prayer').textContent = prayer(state.reading);
+  $('modal').hidden = false;
+}
+function closeModal() { $('modal').hidden = true; }
+function amen() {
+  closeModal();
+  if (state.date !== todayIso()) return showStreak();
+  const { count, already } = bumpStreak(todayIso());
+  $('streak').textContent = already ? `🔥 ${count} días seguidos` : `¡Amén! 🔥 ${count} ${count === 1 ? 'día' : 'días'} de racha`;
   $('streak').hidden = false;
 }
 
@@ -154,6 +179,9 @@ function wire() {
   $('kids').addEventListener('change', (e) => { state.kids = e.target.checked; renderReflection(); });
   $('listen').addEventListener('click', toggleListen);
   $('share').addEventListener('click', share);
+  $('pray').addEventListener('click', openPrayer);
+  $('amen').addEventListener('click', amen);
+  $('modal').addEventListener('click', (e) => { if (e.target === $('modal')) closeModal(); });
   $('install').addEventListener('click', async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
