@@ -38,6 +38,8 @@ function render() {
   const r = state.reading;
   $('date').textContent = humanDate(state.date);
   $('title').textContent = r.title || 'Lectura del día';
+  const hero = $('hero');
+  if (r.image_url) { hero.src = r.image_url; hero.hidden = false; } else { hero.hidden = true; }
   renderTabs();
   renderSection();
   renderReflection();

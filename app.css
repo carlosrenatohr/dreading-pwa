@@ -63,6 +63,13 @@ body {
 }
 .streak { margin: 0.75rem 0 0; color: var(--gold); font-size: 0.9rem; font-weight: 600; }
 
+/* Daily illustration. */
+.hero {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 1rem;
+  margin: 1rem 0 0.25rem; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 /* Reading section tabs. */
 .tabs { display: flex; gap: 0.4rem; overflow-x: auto; margin: 1.25rem 0; padding-bottom: 0.25rem; }
 .tab {
