@@ -1,0 +1,16 @@
+{
+  "name": "Lectura del día",
+  "short_name": "Lectura",
+  "description": "La lectura y el evangelio de hoy, con una reflexión breve.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14172a",
+  "theme_color": "#14172a",
+  "lang": "es",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "dreading-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Installable PWA for the Catholic daily readings — consumes dreading-api.",
+  "scripts": {
+    "test": "node --test",
+    "dev": "python3 -m http.server 5173"
+  }
+}
