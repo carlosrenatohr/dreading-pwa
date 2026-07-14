@@ -116,6 +116,26 @@ body {
 }
 .btn--ghost { background: transparent; color: var(--accent); }
 
+/* Prayer call-to-action + modal. */
+.pray {
+  display: block; width: 100%; margin-top: 1.1rem; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--gold) 65%, var(--accent)));
+  color: #fff; font: inherit; font-weight: 700; padding: 0.9rem; border-radius: 0.8rem;
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.modal {
+  position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 1.25rem;
+  background: color-mix(in srgb, #000 55%, transparent); backdrop-filter: blur(3px);
+}
+.modal[hidden] { display: none; }
+.modal__card {
+  max-width: 28rem; width: 100%; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 1.1rem; padding: 1.6rem; text-align: center; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.modal__title { font-family: var(--serif); font-size: 1.3rem; margin: 0 0 0.8rem; color: var(--gold); }
+.modal__prayer { font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; margin: 0 0 1.3rem; }
+.amen { width: 100%; }
+
 .status { max-width: 40rem; margin: 4rem auto; padding: 0 1.25rem; text-align: center; color: var(--muted); }
 
 @media (prefers-reduced-motion: no-preference) {

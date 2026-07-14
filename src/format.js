@@ -49,6 +49,13 @@ export function liturgicalColor(reading) {
   return '#2f8f5b'; // verde — Tiempo Ordinario
 }
 
+// A short prayer around the day's reading (weaves in the AI "message of the day"
+// when present). Kept light + universal; an AI-generated prayer can replace it later.
+export function prayer(reading) {
+  const msg = reading && reading.message ? ` Que hoy recuerde: «${reading.message}».` : '';
+  return `Señor Jesús, gracias por tu Palabra de este día.${msg} Que eche raíces en mi corazón, guíe mis pasos y me acerque a ti y a los demás. Quédate conmigo hoy.`;
+}
+
 // Daily streak: +1 when today directly follows the last read day, reset to 1 on
 // a gap, unchanged when already counted today.
 export function nextStreak(prev, todayIso) {

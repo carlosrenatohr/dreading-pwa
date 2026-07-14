@@ -1,7 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor } from '../src/format.js';
+import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor, prayer } from '../src/format.js';
+
+test('prayer weaves in the message of the day', () => {
+  assert.match(prayer({ message: 'Escucha.' }), /Señor Jesús/);
+  assert.ok(prayer({ message: 'Escucha.' }).includes('Escucha.'));
+  assert.ok(prayer({}).includes('Señor'));
+});
 
 test('liturgicalColor maps the season from the title (green by default)', () => {
   assert.equal(liturgicalColor({ title: 'Lecturas del XVI Domingo del Tiempo Ordinario' }), '#2f8f5b');
