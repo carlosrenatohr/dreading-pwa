@@ -36,6 +36,19 @@ export function reflectionText(reading, kidsMode) {
   return kidsMode ? (reading.kids_reflection || reading.reflection || '') : (reading.reflection || '');
 }
 
+// Liturgical accent colour, inferred from the reading's title (the source names
+// the season). Green = Tiempo Ordinario is the default.
+const _SEASONS = [
+  [/adviento|cuaresma|cuaresmal|ceniza/i, '#7a5abf'], // morado — Adviento/Cuaresma
+  [/pascua|resurrec|navidad|epifan|solemnidad|as[uú]nci[oó]n|todos los santos|sant[íi]sim/i, '#c49a2b'], // blanco/oro — fiestas
+  [/ramos|pasi[oó]n|pentecost|m[áa]rtir|esp[íi]ritu santo/i, '#c0473f'], // rojo — mártires/Pentecostés
+];
+export function liturgicalColor(reading) {
+  const title = (reading && reading.title) || '';
+  for (const [re, color] of _SEASONS) if (re.test(title)) return color;
+  return '#2f8f5b'; // verde — Tiempo Ordinario
+}
+
 // Daily streak: +1 when today directly follows the last read day, reset to 1 on
 // a gap, unchanged when already counted today.
 export function nextStreak(prev, todayIso) {

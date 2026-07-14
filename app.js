@@ -1,6 +1,6 @@
 import { API_BASE } from './config.js';
 import { createApi } from './src/api.js';
-import { addDays, humanDate, reflectionText, nextStreak } from './src/format.js';
+import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor } from './src/format.js';
 
 const api = createApi(API_BASE);
 const $ = (id) => document.getElementById(id);
@@ -38,6 +38,7 @@ function render() {
   const r = state.reading;
   $('date').textContent = humanDate(state.date);
   $('title').textContent = r.title || 'Lectura del día';
+  document.documentElement.style.setProperty('--accent', liturgicalColor(r));
   const hero = $('hero');
   if (r.image_url) { hero.src = r.image_url; hero.hidden = false; } else { hero.hidden = true; }
   renderTabs();
@@ -132,7 +133,21 @@ window.addEventListener('beforeinstallprompt', (e) => {
   $('install').hidden = false;
 });
 
+/* --- Theme (light / dark), persisted; defaults to the system preference --- */
+function applyTheme(t) {
+  if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  else delete document.documentElement.dataset.theme;
+  $('theme').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
+}
+function toggleTheme() {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('dreading_theme', next);
+  applyTheme(next);
+}
+
 function wire() {
+  applyTheme(localStorage.getItem('dreading_theme') || '');
+  $('theme').addEventListener('click', toggleTheme);
   $('prev').addEventListener('click', () => loadDate(addDays(state.date, -1)));
   $('next').addEventListener('click', () => loadDate(addDays(state.date, 1)));
   $('today').addEventListener('click', () => loadDate(todayIso()));

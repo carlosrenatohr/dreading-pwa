@@ -1,7 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { addDays, humanDate, reflectionText, nextStreak } from '../src/format.js';
+import { addDays, humanDate, reflectionText, nextStreak, liturgicalColor } from '../src/format.js';
+
+test('liturgicalColor maps the season from the title (green by default)', () => {
+  assert.equal(liturgicalColor({ title: 'Lecturas del XVI Domingo del Tiempo Ordinario' }), '#2f8f5b');
+  assert.equal(liturgicalColor({ title: 'Primer Domingo de Adviento' }), '#7a5abf');
+  assert.equal(liturgicalColor({ title: 'Domingo de Resurrección' }), '#c49a2b');
+  assert.equal(liturgicalColor({ title: 'Domingo de Ramos de la Pasión' }), '#c0473f');
+  assert.equal(liturgicalColor({}), '#2f8f5b');
+});
 
 test('addDays crosses month/year boundaries in UTC', () => {
   assert.equal(addDays('2026-07-19', 1), '2026-07-20');
