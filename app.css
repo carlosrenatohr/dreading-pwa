@@ -42,6 +42,12 @@ body {
 
 .app { max-width: 40rem; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
 
+.theme {
+  position: fixed; top: calc(0.7rem + env(safe-area-inset-top)); right: 0.8rem; z-index: 5;
+  width: 2.3rem; height: 2.3rem; border-radius: 50%; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); font-size: 1.05rem; line-height: 1; cursor: pointer;
+}
+
 .masthead { padding: 0.5rem 0 1rem; }
 .datenav { display: flex; align-items: center; gap: 0.5rem; justify-content: center; margin-bottom: 1rem; }
 .datenav__btn {
