@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Lectura del día</title>
+  <meta name="description" content="La lectura y el evangelio de hoy, con una reflexión breve. Para leer cada día." />
+  <meta name="theme-color" content="#14172a" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./icon.svg" />
+  <link rel="stylesheet" href="./app.css" />
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+
+  <main id="app" class="app" hidden>
+    <header class="masthead">
+      <nav class="datenav" aria-label="Navegación por fecha">
+        <button id="prev" class="datenav__btn" aria-label="Día anterior">‹</button>
+        <button id="today" class="datenav__today">Hoy</button>
+        <button id="next" class="datenav__btn" aria-label="Día siguiente">›</button>
+      </nav>
+      <p class="eyebrow" id="date"></p>
+      <h1 class="title" id="title"></h1>
+      <p class="streak" id="streak" hidden></p>
+    </header>
+
+    <div class="tabs" id="tabs" role="tablist" aria-label="Lecturas"></div>
+
+    <article class="reading" id="reading">
+      <p class="reading__incipit" id="incipit"></p>
+      <div class="reading__body" id="body"></div>
+    </article>
+
+    <section class="reflection" id="reflection-card">
+      <div class="reflection__head">
+        <span class="badge">Reflexión</span>
+        <label class="switch">
+          <input type="checkbox" id="kids" />
+          <span>Para niños</span>
+        </label>
+      </div>
+      <p class="reflection__text" id="reflection"></p>
+      <p class="message" id="message"></p>
+      <ul class="questions" id="questions"></ul>
+      <p class="ai-note">Reflexión e ilustración generadas por IA; las lecturas son el texto litúrgico.</p>
+    </section>
+
+    <div class="actions">
+      <button id="listen" class="btn">▶ Escuchar</button>
+      <button id="share" class="btn">Compartir</button>
+      <button id="install" class="btn btn--ghost" hidden>Instalar app</button>
+    </div>
+  </main>
+
+  <div id="status" class="status">Cargando la lectura de hoy…</div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

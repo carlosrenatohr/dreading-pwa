@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Lectura del día">
+  <defs>
+    <radialGradient id="light" cx="50%" cy="18%" r="80%">
+      <stop offset="0%" stop-color="#d8b063" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#14172a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#14172a"/>
+  <rect width="512" height="512" rx="112" fill="url(#light)"/>
+  <!-- open book -->
+  <path d="M256 150c-34-26-84-30-120-22v198c36-8 86-4 120 22 34-26 84-30 120-22V128c-36-8-86-4-120 22z"
+        fill="#f7f4ec"/>
+  <path d="M256 150v198" stroke="#b98a34" stroke-width="10" stroke-linecap="round"/>
+  <!-- page lines -->
+  <g stroke="#6bbd93" stroke-width="8" stroke-linecap="round" opacity="0.9">
+    <path d="M168 196h60M168 226h60M168 256h48"/>
+    <path d="M284 196h60M284 226h60M284 256h48"/>
+  </g>
+  <!-- ribbon -->
+  <path d="M256 348l16 40 16-40z" fill="#b98a34"/>
+</svg>
