@@ -2,4 +2,4 @@
 // setting localStorage 'dreading_api' (handy for pointing at a deployed API).
 const params = new URLSearchParams(location.search);
 export const API_BASE =
-  params.get('api') || localStorage.getItem('dreading_api') || 'https://dreading-api-worker.honchkrow1995.workers.dev/api/v1';
+  params.get('api') || localStorage.getItem('dreading_api') || 'https://dreading-api-worker.nativerse.workers.dev/api/v1';
