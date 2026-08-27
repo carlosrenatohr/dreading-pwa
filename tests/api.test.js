@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import { createApi } from '../src/api.js';
 
@@ -33,4 +34,10 @@ test('byDate() returns null when there is no reading', async () => {
 test('a non-ok response throws', async () => {
   const api = createApi('http://x/api/v1', fakeFetch({}));
   await assert.rejects(() => api.last(), /API 404/);
+});
+
+test('config.js defaults to the nativerse API URL', () => {
+  const src = readFileSync(new URL('../config.js', import.meta.url), 'utf8');
+  assert.ok(src.includes('nativerse.workers.dev'), 'expected nativerse.workers.dev in config.js');
+  assert.ok(!src.includes('honchkrow1995'), 'honchkrow1995 must not appear in config.js');
 });
