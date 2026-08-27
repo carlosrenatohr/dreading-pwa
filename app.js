@@ -190,6 +190,12 @@ function wire() {
   });
 }
 
+// Migrate clients stuck on the old workers.dev subdomain.
+const stored = localStorage.getItem('dreading_api');
+if (stored && stored.includes('honchkrow1995')) {
+  localStorage.removeItem('dreading_api');
+}
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
 }

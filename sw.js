@@ -1,6 +1,6 @@
 // Offline support: cache the app shell (cache-first) and the last reading
 // (network-first, falling back to cache) so today's reading stays available.
-const SHELL = 'dreading-shell-v1';
+const SHELL = 'dreading-shell-v2';
 const DATA = 'dreading-data-v1';
 const SHELL_FILES = [
   './', './index.html', './app.css', './app.js', './config.js',
